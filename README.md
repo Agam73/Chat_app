@@ -47,7 +47,7 @@ Chat_App/
 ### Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/<repo-name>.git
+git clone https://github.com/Agam73/Chat_app.git
 ```
 
 ### Install dependencies
@@ -73,7 +73,7 @@ Create a `.env` file inside the `server` folder.
 Example:
 
 ```
-PORT=5000
+PORT=3000
 MONGO_URI=your_mongodb_uri
 JWT_secret=your_secret
 CLOUDINARY_CLOUD_NAME=your_cloud_name
@@ -86,6 +86,15 @@ CLOUDINARY_API_SECRET=your_secret
 ```bash
 cd server
 npm run dev
+```
+
+Create a `.env` file inside the `client` folder.
+
+Example:
+
+```
+VITE_BACKEND_URL=http://localhost:3000/api/v1
+VITE_SOCKET_URL=http://localhost:3000
 ```
 
 ### Run the Frontend
