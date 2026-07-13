@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+body{
+  overflow-x: hidden;
+}
+#root{
+  background-color: #1f2937;
+}
+
+@keyframes spinGrowShrink {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(15deg) scale(1.5);
+  }
+
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+.animate-logo {
+  display: inline-block;
+  transform-origin: center;
+  animation: spinGrowShrink 4s ease-in-out infinite;
+}
+
+::-webkit-scrollbar{
+  width: 6px;
+}
+::-webkit-scrollbar-thumb{
+  background-color : cornflowerblue;
+  border-radius: 10px;
+}
