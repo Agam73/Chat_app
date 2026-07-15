@@ -51,7 +51,8 @@ const Messages_container = ({chatUserId}) => {
     if(!message) return;
     const data = {
       receiverId:chatUserId,
-      message
+      message,
+      clientSentAt: Date.now()  
     }
     try {
       setmsgLoading(true);
@@ -93,11 +94,13 @@ const Messages_container = ({chatUserId}) => {
     scrollToBottom();
   },[allMessages])
   
-  const handleMessage = useCallback((data)=>{
-    if(data?.senderId === chatUserId){
-      setAllMessages(prev => [...prev, data]);
-    }
-  },[chatUserId]);
+const handleMessage = useCallback((data) => {
+  if (data?.senderId === chatUserId) {
+    const latency = Date.now() - data.clientSentAt;
+    console.log(`Message latency: ${latency}ms`);
+    setAllMessages(prev => [...prev, data]);
+  }
+}, [chatUserId]);
 
   useEffect(()=>{
     if (!socket) return;

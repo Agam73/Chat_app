@@ -6,7 +6,7 @@ const { getreceiverSocketId, io } = require("../socket/socket");
 //create a new message
 exports.SendMessage = async (req, res) => {
     try {
-        const {receiverId, message} = req.body;
+        const {receiverId, message, clientSentAt} = req.body;
         const senderId = req.user.userId;
 
         if(!receiverId || !message || !senderId){
@@ -39,7 +39,10 @@ exports.SendMessage = async (req, res) => {
 
         const receiverSocketId = getreceiverSocketId(receiverId);
         if(receiverSocketId){
-            io.to(receiverSocketId).emit("new-message",newMessage);
+            io.to(receiverSocketId).emit("new-message", {
+                ...newMessage.toObject(),
+                clientSentAt: req.body.clientSentAt
+            });
         }
         
         return res.status(201).json({
@@ -57,7 +60,6 @@ exports.SendMessage = async (req, res) => {
         
     }
 }
-
 exports.getAllMessages = async (req, res) => {
     try {
         const currentUserId = req.user.userId;
