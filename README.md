@@ -1,9 +1,7 @@
 # Chat App
-
 A real-time full-stack chat application built using the MERN stack and Socket.IO.
 
 ## Features
-
 - User Authentication (JWT)
 - Signup & Login
 - Real-time Messaging
@@ -14,7 +12,6 @@ A real-time full-stack chat application built using the MERN stack and Socket.IO
 - Responsive UI
 
 ## Tech Stack
-
 ### Frontend
 - React
 - Redux Toolkit
@@ -35,12 +32,20 @@ A real-time full-stack chat application built using the MERN stack and Socket.IO
 - Socket.IO
 - Multer
 
-## Folder Structure
+### DevOps
+- Docker
+- Docker Compose
 
+## Folder Structure
 ```
 Chat_App/
 ├── client/
+│   ├── Dockerfile
+│   └── .dockerignore
 ├── server/
+│   ├── Dockerfile
+│   └── .dockerignore
+├── docker-compose.yml
 ├── README.md
 └── .gitignore
 ```
@@ -48,33 +53,32 @@ Chat_App/
 ## Installation
 
 ### Clone the repository
-
 ```bash
 git clone https://github.com/Agam73/Chat_app.git
 ```
 
+You can run this project either **locally** (Node.js installed on your machine) or with **Docker** (no local Node.js setup needed).
+
+---
+
+## Option 1: Run Locally
+
 ### Install dependencies
-
 Backend
-
 ```bash
 cd server
 npm install
 ```
 
 Frontend
-
 ```bash
 cd client
 npm install
 ```
 
 ### Create Environment Variables
-
 Create a `.env` file inside the `server` folder.
-
 Example:
-
 ```
 PORT=3000
 MONGO_URI=your_mongodb_uri
@@ -84,31 +88,60 @@ CLOUDINARY_API_KEY=your_key
 CLOUDINARY_API_SECRET=your_secret
 ```
 
-### Run the Backend
-
-```bash
-cd server
-npm run dev
-```
-
 Create a `.env` file inside the `client` folder.
-
 Example:
-
 ```
 VITE_BACKEND_URL=http://localhost:3000/api/v1
 VITE_SOCKET_URL=http://localhost:3000
 ```
 
-### Run the Frontend
+### Run the Backend
+```bash
+cd server
+npm run dev
+```
 
+### Run the Frontend
 ```bash
 cd client
 npm run dev
 ```
 
-## Future Improvements
+---
 
+## Option 2: Run with Docker
+
+### Prerequisites
+- [Docker](https://www.docker.com/) and Docker Compose installed
+
+### Create Environment Variables
+Same as above — create `.env` files inside both `server/` and `client/` folders (see examples in Option 1).
+
+### Build and Run Containers
+From the project root:
+```bash
+docker compose up --build
+```
+
+This will:
+- Build the client and server images
+- Start the backend on `http://localhost:3000`
+- Start the frontend on `http://localhost:5173`
+
+### Stop Containers
+```bash
+docker compose down
+```
+
+### Rebuild After Dependency Changes
+If you add/update npm packages, rebuild the images:
+```bash
+docker compose up --build
+```
+
+---
+
+## Future Improvements
 - Group Chats
 - Message Reactions
 - Read Receipts
@@ -117,5 +150,4 @@ npm run dev
 - Notifications
 
 ## Author
-
 **Agam Bansal**
